@@ -2,11 +2,20 @@
 
 import { ShoppingBag } from "lucide-react";
 
-export function Navigation() {
+interface NavigationProps {
+  activePage?: "collections" | "gifting" | "about" | "contact";
+}
+
+export function Navigation({ activePage }: NavigationProps) {
+  const linkClass = (page: string) =>
+    `font-body text-[14px] hover:text-[var(--foreground)] transition-colors ${
+      activePage === page ? "text-[var(--foreground)]" : "text-[var(--text-gray)]"
+    }`;
+
   return (
     <nav className="flex items-center justify-between px-[80px] py-[20px] w-full border-b border-[var(--border-light)]">
       {/* Logo */}
-      <div className="flex items-center gap-[12px]">
+      <a href="/" className="flex items-center gap-[12px]">
         <div className="flex items-center justify-center w-[36px] h-[36px] border border-[var(--primary)]">
           <span className="font-display text-[18px] font-medium text-[var(--primary)]">
             C
@@ -15,22 +24,14 @@ export function Navigation() {
         <span className="font-display text-[22px] text-[var(--foreground)] tracking-[3px]">
           CADEAU
         </span>
-      </div>
+      </a>
 
       {/* Nav Links */}
       <div className="flex items-center gap-[40px]">
-        <a href="#" className="font-body text-[14px] text-[var(--text-gray)] hover:text-[var(--foreground)] transition-colors">
-          Collections
-        </a>
-        <a href="#" className="font-body text-[14px] text-[var(--text-gray)] hover:text-[var(--foreground)] transition-colors">
-          Gifting
-        </a>
-        <a href="#" className="font-body text-[14px] text-[var(--text-gray)] hover:text-[var(--foreground)] transition-colors">
-          About
-        </a>
-        <a href="#" className="font-body text-[14px] text-[var(--text-gray)] hover:text-[var(--foreground)] transition-colors">
-          Contact
-        </a>
+        <a href="#" className={linkClass("collections")}>Collections</a>
+        <a href="#" className={linkClass("gifting")}>Gifting</a>
+        <a href="/about" className={linkClass("about")}>About</a>
+        <a href="/contact" className={linkClass("contact")}>Contact</a>
       </div>
 
       {/* Right Side */}
